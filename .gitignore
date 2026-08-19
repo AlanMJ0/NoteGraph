@@ -1,0 +1,26 @@
+.env
+.env.*
+!.env.example
+
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# RAG & Local Storage (Cache & Vector DBs)
+cache/
+vectordb/
+
+# Temporary / Local Scripts
+test.py
+
+# System & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

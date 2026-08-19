@@ -1,0 +1,20 @@
+[
+    {
+        "id": "q1",
+        "question": "What is the time complexity of QuickSort in the average case?",
+        "expected_route": "VECTOR",
+        "gold_source_hint": "quicksort average case O(n log n)"
+    },
+    {
+        "id": "q2",
+        "question": "What topics should I understand before learning Dynamic Programming?",
+        "expected_route": "GRAPH",
+        "gold_source_hint": "recursion requires understanding of dynamic programming"
+    },
+    {
+        "id": "q3",
+        "question": "Explain how hash tables relate to caching, and give the exact collision-resolution technique used.",
+        "expected_route": "HYBRID",
+        "gold_source_hint": "hash table used in caching collision resolution chaining"
+    }
+]

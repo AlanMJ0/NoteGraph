@@ -1,0 +1,629 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "concept",
+      "id": "Hash Table"
+    },
+    {
+      "type": "concept",
+      "id": "key-value pairs"
+    },
+    {
+      "type": "concept",
+      "id": "O(1)"
+    },
+    {
+      "type": "concept",
+      "id": "hash function"
+    },
+    {
+      "type": "concept",
+      "id": "keys to bucket indices"
+    },
+    {
+      "type": "concept",
+      "id": "caching"
+    },
+    {
+      "type": "concept",
+      "id": "Collision"
+    },
+    {
+      "type": "concept",
+      "id": "Chaining"
+    },
+    {
+      "type": "concept",
+      "id": "Open Addressing"
+    },
+    {
+      "type": "concept",
+      "id": "linked list"
+    },
+    {
+      "type": "concept",
+      "id": "linear probing"
+    },
+    {
+      "type": "concept",
+      "id": "quadratic probing"
+    },
+    {
+      "type": "concept",
+      "id": "double hashing"
+    },
+    {
+      "type": "concept",
+      "id": "linear data structure"
+    },
+    {
+      "type": "concept",
+      "id": "node"
+    },
+    {
+      "type": "concept",
+      "id": "pointer"
+    },
+    {
+      "type": "concept",
+      "id": "O(n) random access"
+    },
+    {
+      "type": "concept",
+      "id": "Binary Search Tree"
+    },
+    {
+      "type": "concept",
+      "id": "O(log n)"
+    },
+    {
+      "type": "concept",
+      "id": "balanced tree"
+    },
+    {
+      "type": "concept",
+      "id": "Insert"
+    },
+    {
+      "type": "concept",
+      "id": "Delete"
+    },
+    {
+      "type": "concept",
+      "id": "AVL tree"
+    },
+    {
+      "type": "concept",
+      "id": "self-balancing BST"
+    },
+    {
+      "type": "concept",
+      "id": "balance factor"
+    },
+    {
+      "type": "concept",
+      "id": "difference in heights of left and right subtrees"
+    },
+    {
+      "type": "concept",
+      "id": "Dynamic Programming"
+    },
+    {
+      "type": "concept",
+      "id": "algorithmic technique"
+    },
+    {
+      "type": "concept",
+      "id": "memoization"
+    },
+    {
+      "type": "concept",
+      "id": "tabulation"
+    },
+    {
+      "type": "concept",
+      "id": "Recursion"
+    },
+    {
+      "type": "concept",
+      "id": "DP solutions"
+    },
+    {
+      "type": "concept",
+      "id": "recursive solution"
+    },
+    {
+      "type": "concept",
+      "id": "cache"
+    },
+    {
+      "type": "concept",
+      "id": "dictionary or array"
+    },
+    {
+      "type": "concept",
+      "id": "recursive call results"
+    },
+    {
+      "type": "concept",
+      "id": "subproblem computation"
+    },
+    {
+      "type": "concept",
+      "id": "Bottom-Up"
+    },
+    {
+      "type": "concept",
+      "id": "base cases"
+    },
+    {
+      "type": "concept",
+      "id": "fib(n)"
+    },
+    {
+      "type": "concept",
+      "id": "Function Calls"
+    },
+    {
+      "type": "concept",
+      "id": "Call Stack"
+    },
+    {
+      "type": "concept",
+      "id": "Array operations"
+    },
+    {
+      "type": "concept",
+      "id": "Dictionary operations"
+    },
+    {
+      "type": "concept",
+      "id": "building memo"
+    },
+    {
+      "type": "concept",
+      "id": "building table"
+    },
+    {
+      "type": "concept",
+      "id": "QuickSort"
+    },
+    {
+      "type": "concept",
+      "id": "sorting algorithm"
+    },
+    {
+      "type": "concept",
+      "id": "divide-and-conquer"
+    },
+    {
+      "type": "concept",
+      "id": "O(n log n)"
+    },
+    {
+      "type": "concept",
+      "id": "O(n\u00b2)"
+    },
+    {
+      "type": "concept",
+      "id": "pivot selection"
+    },
+    {
+      "type": "concept",
+      "id": "partitioning"
+    },
+    {
+      "type": "concept",
+      "id": "already-sorted input"
+    },
+    {
+      "type": "concept",
+      "id": "MergeSort"
+    },
+    {
+      "type": "concept",
+      "id": "BubbleSort"
+    }
+  ],
+  "edges": [
+    {
+      "relation_type": "stores",
+      "source_chunk_id": "b8331196",
+      "source": "Hash Table",
+      "target": "key-value pairs"
+    },
+    {
+      "relation_type": "has_average_time_complexity",
+      "source_chunk_id": "b8331196",
+      "source": "Hash Table",
+      "target": "O(1)"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "b8331196",
+      "source": "Hash Table",
+      "target": "hash function"
+    },
+    {
+      "relation_type": "used_in",
+      "source_chunk_id": "b8331196",
+      "source": "Hash Table",
+      "target": "caching"
+    },
+    {
+      "relation_type": "maps",
+      "source_chunk_id": "b8331196",
+      "source": "hash function",
+      "target": "keys to bucket indices"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "b8331196",
+      "source": "caching",
+      "target": "Hash Table"
+    },
+    {
+      "relation_type": "is_resolved_by",
+      "source_chunk_id": "18370f47",
+      "source": "Collision",
+      "target": "Chaining"
+    },
+    {
+      "relation_type": "is_resolved_by",
+      "source_chunk_id": "18370f47",
+      "source": "Collision",
+      "target": "Open Addressing"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "18370f47",
+      "source": "Chaining",
+      "target": "linked list"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "18370f47",
+      "source": "Open Addressing",
+      "target": "linear probing"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "18370f47",
+      "source": "Open Addressing",
+      "target": "quadratic probing"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "18370f47",
+      "source": "Open Addressing",
+      "target": "double hashing"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "b9cfd114",
+      "source": "linked list",
+      "target": "linear data structure"
+    },
+    {
+      "relation_type": "composed_of",
+      "source_chunk_id": "b9cfd114",
+      "source": "linked list",
+      "target": "node"
+    },
+    {
+      "relation_type": "has_complexity",
+      "source_chunk_id": "b9cfd114",
+      "source": "linked list",
+      "target": "O(1)"
+    },
+    {
+      "relation_type": "has_complexity",
+      "source_chunk_id": "b9cfd114",
+      "source": "linked list",
+      "target": "O(n) random access"
+    },
+    {
+      "relation_type": "used_in",
+      "source_chunk_id": "b9cfd114",
+      "source": "linked list",
+      "target": "Hash Table"
+    },
+    {
+      "relation_type": "contains",
+      "source_chunk_id": "b9cfd114",
+      "source": "node",
+      "target": "key-value pairs"
+    },
+    {
+      "relation_type": "contains",
+      "source_chunk_id": "b9cfd114",
+      "source": "node",
+      "target": "pointer"
+    },
+    {
+      "relation_type": "is_a",
+      "source_chunk_id": "5230c598",
+      "source": "Binary Search Tree",
+      "target": "linear data structure"
+    },
+    {
+      "relation_type": "has_average_complexity",
+      "source_chunk_id": "5230c598",
+      "source": "Binary Search Tree",
+      "target": "O(log n)"
+    },
+    {
+      "relation_type": "has_worst_case_complexity",
+      "source_chunk_id": "5230c598",
+      "source": "Binary Search Tree",
+      "target": "O(n) random access"
+    },
+    {
+      "relation_type": "requires",
+      "source_chunk_id": "5230c598",
+      "source": "Binary Search Tree",
+      "target": "balanced tree"
+    },
+    {
+      "relation_type": "is_operation_of",
+      "source_chunk_id": "5230c598",
+      "source": "Binary Search Tree",
+      "target": "Binary Search Tree"
+    },
+    {
+      "relation_type": "is_operation_of",
+      "source_chunk_id": "5230c598",
+      "source": "Insert",
+      "target": "Binary Search Tree"
+    },
+    {
+      "relation_type": "is_operation_of",
+      "source_chunk_id": "5230c598",
+      "source": "Delete",
+      "target": "Binary Search Tree"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "82c5aef3",
+      "source": "AVL tree",
+      "target": "self-balancing BST"
+    },
+    {
+      "relation_type": "maintains",
+      "source_chunk_id": "82c5aef3",
+      "source": "AVL tree",
+      "target": "balance factor"
+    },
+    {
+      "relation_type": "has_complexity",
+      "source_chunk_id": "82c5aef3",
+      "source": "AVL tree",
+      "target": "O(log n)"
+    },
+    {
+      "relation_type": "defined_as",
+      "source_chunk_id": "82c5aef3",
+      "source": "balance factor",
+      "target": "difference in heights of left and right subtrees"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "9e2942ef",
+      "source": "Dynamic Programming",
+      "target": "algorithmic technique"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "9e2942ef",
+      "source": "Dynamic Programming",
+      "target": "memoization"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "9e2942ef",
+      "source": "Dynamic Programming",
+      "target": "tabulation"
+    },
+    {
+      "relation_type": "requires_understanding_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "Recursion"
+    },
+    {
+      "relation_type": "requires_understanding_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "Function Calls"
+    },
+    {
+      "relation_type": "requires_understanding_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "Call Stack"
+    },
+    {
+      "relation_type": "requires_understanding_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "Array operations"
+    },
+    {
+      "relation_type": "requires_understanding_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "Dictionary operations"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "recursive solution"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "64f34534",
+      "source": "Dynamic Programming",
+      "target": "caching"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "28f20ad1",
+      "source": "memoization",
+      "target": "Dynamic Programming"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "28f20ad1",
+      "source": "memoization",
+      "target": "cache"
+    },
+    {
+      "relation_type": "stores",
+      "source_chunk_id": "28f20ad1",
+      "source": "memoization",
+      "target": "recursive call results"
+    },
+    {
+      "relation_type": "optimizes",
+      "source_chunk_id": "28f20ad1",
+      "source": "memoization",
+      "target": "subproblem computation"
+    },
+    {
+      "relation_type": "is_also_known_as",
+      "source_chunk_id": "9d8eaebc",
+      "source": "tabulation",
+      "target": "Bottom-Up"
+    },
+    {
+      "relation_type": "avoids_use_of",
+      "source_chunk_id": "9d8eaebc",
+      "source": "tabulation",
+      "target": "Recursion"
+    },
+    {
+      "relation_type": "requires",
+      "source_chunk_id": "9d8eaebc",
+      "source": "tabulation",
+      "target": "base cases"
+    },
+    {
+      "relation_type": "uses",
+      "source_chunk_id": "9d8eaebc",
+      "source": "tabulation",
+      "target": "Hash Table"
+    },
+    {
+      "relation_type": "starts_as",
+      "source_chunk_id": "9e2942ef",
+      "source": "DP solutions",
+      "target": "recursive solution"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "28f20ad1",
+      "source": "cache",
+      "target": "dictionary or array"
+    },
+    {
+      "relation_type": "is_an_example_of",
+      "source_chunk_id": "9d8eaebc",
+      "source": "fib(n)",
+      "target": "tabulation"
+    },
+    {
+      "relation_type": "used_in",
+      "source_chunk_id": "64f34534",
+      "source": "Dictionary operations",
+      "target": "building memo"
+    },
+    {
+      "relation_type": "used_in",
+      "source_chunk_id": "64f34534",
+      "source": "Dictionary operations",
+      "target": "building table"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "sorting algorithm"
+    },
+    {
+      "relation_type": "uses_paradigm",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "divide-and-conquer"
+    },
+    {
+      "relation_type": "has_average_time_complexity",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "O(n log n)"
+    },
+    {
+      "relation_type": "has_worst_case_time_complexity",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "O(n\u00b2)"
+    },
+    {
+      "relation_type": "uses_technique",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "pivot selection"
+    },
+    {
+      "relation_type": "uses_technique",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "partitioning"
+    },
+    {
+      "relation_type": "is_negatively_affected_by",
+      "source_chunk_id": "88cfa595",
+      "source": "QuickSort",
+      "target": "already-sorted input"
+    },
+    {
+      "relation_type": "improves",
+      "source_chunk_id": "88cfa595",
+      "source": "pivot selection",
+      "target": "QuickSort"
+    },
+    {
+      "relation_type": "has_time_complexity",
+      "source_chunk_id": "66fd84b5",
+      "source": "MergeSort",
+      "target": "O(n log n)"
+    },
+    {
+      "relation_type": "uses_technique",
+      "source_chunk_id": "66fd84b5",
+      "source": "MergeSort",
+      "target": "Recursion"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "66fd84b5",
+      "source": "MergeSort",
+      "target": "sorting algorithm"
+    },
+    {
+      "relation_type": "has_complexity",
+      "source_chunk_id": "f0c0d7d3",
+      "source": "BubbleSort",
+      "target": "O(n\u00b2)"
+    },
+    {
+      "relation_type": "is_a_type_of",
+      "source_chunk_id": "f0c0d7d3",
+      "source": "BubbleSort",
+      "target": "sorting algorithm"
+    }
+  ]
+}
