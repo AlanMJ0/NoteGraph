@@ -1,133 +1,106 @@
 """
-RAG Study Assistant — Streamlit UI
-Handles both ingestion of notes and answering questions.
+RAG Study Assistant — Streamlit UI (Connected via FastAPI Backend)
 """
 
-import os
 import streamlit as st
-from src import config, graph_engine, vector_engine
-from src.chunker import chunk_document
-from src.pipeline import run_query
-from src.gemini_client import generate_json
+import requests
+
+API_URL = "http://127.0.0.1:8000"
 
 # ── page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="RAG Study Assistant",
+    page_title="NoteGraph RAG Assistant",
     page_icon="🧠",
     layout="wide",
 )
 
-# ── load graph once per session ───────────────────────────────────────────────
-if "graph_loaded" not in st.session_state:
-    graph_engine.load_graph()
-    st.session_state["graph_loaded"] = True
-
-
-# ── helper: ingest all markdown files from raw_notes ─────────────────────────
-def ingest_notes():
-    notes_dir = config.RAW_NOTES_DIR
-    files = [f for f in os.listdir(notes_dir) if f.endswith(".md") or f.endswith(".txt")]
-    if not files:
-        return 0, []
-
-    # Clear old data before ingesting to prevent duplication
-    graph_engine.clear()
-    vector_engine.clear()
-
-    ingested = []
-    for filename in files:
-        filepath = os.path.join(notes_dir, filename)
-        with open(filepath, "r", encoding="utf-8") as fh:
-            text = fh.read()
-
-        chunks = chunk_document(text, source_file=filename)
-        vector_engine.upsert_chunks(chunks)
-
-        triples = []
-        for chunk in chunks:
-            triples.extend(graph_engine.extract_triples(chunk.text, chunk.chunk_id))
-        graph_engine.add_triples(triples)
-        ingested.append((filename, len(chunks), len(triples)))
-
-    graph_engine.save_graph()
-    return len(files), ingested
-
-
-# ── sidebar ───────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.title("🧠 RAG Assistant")
-    st.markdown("---")
-
-    st.subheader("📚 Knowledge Base")
-    stats = vector_engine.collection.count()
-    gstats = graph_engine.graph_stats()
-    col1, col2 = st.columns(2)
-    col1.metric("Chunks", stats)
-    col2.metric("Graph nodes", gstats["nodes"])
-
-    st.markdown("---")
-    st.subheader("⚙️ Ingest Notes")
-    notes_dir = config.RAW_NOTES_DIR
-    note_files = [f for f in os.listdir(notes_dir) if f.endswith((".md", ".txt"))] if os.path.isdir(notes_dir) else []
-    st.caption(f"{len(note_files)} file(s) in `data/raw_notes/`")
-    for f in note_files:
-        st.markdown(f"- `{f}`")
-
-    if st.button("▶ Ingest all notes", use_container_width=True, type="primary"):
-        with st.spinner("Ingesting…"):
-            count, details = ingest_notes()
-        if count == 0:
-            st.warning("No `.md` or `.txt` files found in `data/raw_notes/`.")
-        else:
-            st.success(f"✅ Ingested {count} file(s)!")
-            for fname, n_chunks, n_triples in details:
-                st.caption(f"`{fname}` → {n_chunks} chunks, {n_triples} triples")
-            st.rerun()
-
-    st.markdown("---")
-    st.caption("Add your own `.md` notes to `data/raw_notes/` then click Ingest.")
-
-
-# ── main chat area ────────────────────────────────────────────────────────────
-st.title("🧠 RAG Study Assistant")
-st.markdown("Ask anything about your study notes. The assistant uses **vector search** and a **knowledge graph** to answer.")
-
-if stats == 0:
-    st.warning("⚠️ Knowledge base is empty! Add notes to `data/raw_notes/` and click **Ingest all notes** in the sidebar.")
-
-# keep chat history
+# Initialize Session State
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
+if "session_id" not in st.session_state:
+    st.session_state["session_id"] = None
+
+
+# Helper function to check API availability
+def check_api_health():
+    try:
+        res = requests.get(f"{API_URL}/health", timeout=2)
+        return res.status_code == 200
+    except Exception:
+        return False
+
+
+api_online = check_api_health()
+
+# ── sidebar ───────────────────────────────────────────────────────────────────
+with st.sidebar:
+    st.title("🧠 NoteGraph")
+    st.markdown("---")
+
+    if not api_online:
+        st.error("⚠️ FastAPI backend offline! Run: `uvicorn api.main:app --reload`")
+    else:
+        st.success("🟢 Connected to FastAPI backend")
+
+    st.markdown("---")
+    st.subheader("⚙️ Session Controls")
+    if st.button("➕ New Chat Session", use_container_width=True):
+        st.session_state["messages"] = []
+        st.session_state["session_id"] = None
+        st.rerun()
+
+    if st.session_state["session_id"]:
+        st.caption(f"Active Session ID: `{st.session_state['session_id']}`")
+
+
+# ── main chat area ────────────────────────────────────────────────────────────
+st.title("🧠 NoteGraph RAG Assistant")
+st.markdown("Ask technical questions from your study notes. Powered by **Vector Search**, **Knowledge Graph**, and **PostgreSQL**.")
+
+# Display Chat History
 for msg in st.session_state["messages"]:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-if prompt := st.chat_input("Ask a question about your notes…"):
+# Chat Input Handler
+if prompt := st.chat_input("Ask a question about your notes…", disabled=not api_online):
+    # Append user question to UI
     st.session_state["messages"].append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
+    # Process via FastAPI Backend
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            result = run_query(prompt)
+            try:
+                payload = {
+                    "question": prompt,
+                    "session_id": st.session_state["session_id"]
+                }
+                
+                response = requests.post(f"{API_URL}/chat/query", json=payload)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    answer = data["answer"]
+                    route = data["route"]
+                    concept = data.get("extracted_concept")
+                    latency = data.get("latency_ms")
+                    
+                    # Store session ID returned by backend
+                    st.session_state["session_id"] = data["session_id"]
 
-        answer = result["answer"]
-        route = result["route"]
-        st.markdown(answer)
+                    st.markdown(answer)
 
-        # ── debug expander ────────────────────────────────────────────────
-        with st.expander(f"🔍 Debug — Route: `{route}`", expanded=False):
-            if "vector_chunks" in result:
-                st.subheader("Vector chunks used")
-                for c in result["vector_chunks"]:
-                    st.markdown(f"**`{c['chunk_id']}`** (dist `{c['distance']:.3f}`) — *{c['metadata'].get('source_file','')}*")
-                    st.code(c["text"][:400])
-            if "graph_edges" in result:
-                st.subheader("Graph edges used")
-                for e in result["graph_edges"]:
-                    st.markdown(f"`{e['source']}` —[**{e['relation']}**]→ `{e['target']}`")
-            st.subheader("Full context sent to Gemini")
-            st.text(result.get("context_used", "(empty)"))
+                    # Debug expander showing API metadata
+                    with st.expander(f"🔍 Route: `{route}` | Latency: `{latency}ms`", expanded=False):
+                        st.markdown(f"**Extracted Concept:** `{concept}`")
+                        st.markdown(f"**Saved Session ID:** `{data['session_id']}`")
+                        
+                    st.session_state["messages"].append({"role": "assistant", "content": answer})
+                else:
+                    st.error(f"API Error ({response.status_code}): {response.text}")
 
-    st.session_state["messages"].append({"role": "assistant", "content": answer})
+            except Exception as e:
+                st.error(f"Failed to communicate with FastAPI backend: {e}")

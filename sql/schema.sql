@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS documents(
+    id SERIAL PRIMARY KEY,
+    file_name VARCHAR(255) NOT NULL, 
+    uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    chunk_count INT NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS chunks(
+    id VARCHAR(255) PRIMARY KEY,
+    document_id INT REFERENCES documents(id) ON DELETE CASCADE,
+    position INT NOT NULL,
+    section_heading VARCHAR(255)
+);
+CREATE TABLE IF NOT EXISTS chat_sessions(
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS messages(
+    id SERIAL PRIMARY KEY,
+    session_id INT REFERENCES chat_sessions(id) ON DELETE CASCADE,
+    role VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS query_logs(
+    id SERIAL PRIMARY KEY,
+    message_id INT REFERENCES messages(id) ON DELETE CASCADE,
+    route VARCHAR(255) NOT NULL,
+    model VARCHAR(255) NOT NULL,
+    extracted_concept VARCHAR(255),
+    latency_ms INT NOT NULL,
+    verified BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS eval_runs(
+    id SERIAL PRIMARY KEY,
+    run_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    model VARCHAR(255) NOT NULL,
+    router_accuracy FLOAT NOT NULL,
+    vector_hitrate FLOAT NOT NULL,
+    graph_hitrate FLOAT NOT NULL,
+    hybrid_hitrate FLOAT NOT NULL
+);
